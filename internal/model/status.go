@@ -19,12 +19,14 @@ const (
 	StatusPaused       Status = "Paused"
 	StatusClosed       Status = "Closed"
 	StatusNotABug      Status = "Not a Bug"
+	StatusDropped      Status = "Dropped"
 )
 
 var AllStatuses = []Status{
 	StatusNotStarted, StatusInProgress, StatusInReview,
 	StatusSubmitted, StatusAwaitingMerge, StatusMerged,
 	StatusDone, StatusBlocked, StatusPaused, StatusClosed, StatusNotABug,
+	StatusDropped,
 }
 
 // statusLevel maps statuses to their progression level.
@@ -39,6 +41,7 @@ var statusLevel = map[Status]int{
 	StatusDone:          6,
 	StatusClosed:        6,
 	StatusNotABug:       6,
+	StatusDropped:       6,
 }
 
 // NormalizeStatus accepts a case-insensitive status string and returns the canonical form.

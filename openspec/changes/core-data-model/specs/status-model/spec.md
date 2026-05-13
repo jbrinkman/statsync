@@ -1,10 +1,10 @@
 ## ADDED Requirements
 
 ### Requirement: Canonical status set
-The system SHALL recognize exactly 11 statuses for work item lifecycle tracking, organized into synonym groups that represent the same progression stage.
+The system SHALL recognize exactly 12 statuses for work item lifecycle tracking, organized into synonym groups that represent the same progression stage.
 
 #### Scenario: Valid statuses accepted
-- **WHEN** user sets a work item status to any of: "Not Started", "In Progress", "In Review", "Submitted", "Awaiting Merge", "Merged", "Done", "Blocked", "Paused", "Closed", "Not a Bug"
+- **WHEN** user sets a work item status to any of: "Not Started", "In Progress", "In Review", "Submitted", "Awaiting Merge", "Merged", "Done", "Blocked", "Paused", "Closed", "Not a Bug", "Dropped"
 - **THEN** the status is accepted and stored
 
 #### Scenario: Invalid status rejected
@@ -12,7 +12,7 @@ The system SHALL recognize exactly 11 statuses for work item lifecycle tracking,
 - **THEN** the system SHALL reject the input and display the list of valid statuses
 
 ### Requirement: Status synonym groups
-The system SHALL treat the following statuses as equivalent stages for progression ordering: "Submitted" and "Awaiting Merge" represent the same stage; "Done", "Closed", and "Not a Bug" represent the same terminal stage.
+The system SHALL treat the following statuses as equivalent stages for progression ordering: "Submitted" and "Awaiting Merge" represent the same stage; "Done", "Closed", "Not a Bug", and "Dropped" represent the same terminal stage.
 
 #### Scenario: Synonyms at same progression level
 - **WHEN** computing project status with one item at "Submitted" and another at "Awaiting Merge"

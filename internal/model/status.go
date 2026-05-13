@@ -90,6 +90,11 @@ func ComputeProjectStatus(items []WorkItem) Status {
 			if level < lowestLevel {
 				lowestLevel = level
 			}
+		} else {
+			// Treat Not Started as In Progress for lowest calculation
+			if statusLevel[StatusInProgress] < lowestLevel {
+				lowestLevel = statusLevel[StatusInProgress]
+			}
 		}
 	}
 

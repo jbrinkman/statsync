@@ -13,6 +13,7 @@ type WorkItem struct {
 	ECD         string   `json:"ecd,omitempty"`
 	JiraIssue   string   `json:"jiraIssue,omitempty"`
 	GithubIssue string   `json:"githubIssue,omitempty"`
+	Notes       string   `json:"notes,omitempty"`
 }
 
 type Project struct {

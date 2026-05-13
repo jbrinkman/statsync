@@ -55,6 +55,9 @@ var showCmd = &cobra.Command{
 				if item.GithubIssue != "" {
 					fmt.Printf("    GitHub: %s\n", item.GithubIssue)
 				}
+				if item.Notes != "" {
+					fmt.Printf("    Notes: %s\n", item.Notes)
+				}
 				if prs != "" {
 					fmt.Printf("   %s\n", prs)
 				}

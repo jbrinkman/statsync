@@ -80,6 +80,9 @@ var updateCmd = &cobra.Command{
 					if gh, _ := cmd.Flags().GetString("github-issue"); gh != "" {
 						p.WorkItems[i].GithubIssue = gh
 					}
+					if notes, _ := cmd.Flags().GetString("item-notes"); notes != "" {
+						p.WorkItems[i].Notes = notes
+					}
 					break
 				}
 			}
@@ -113,4 +116,5 @@ func init() {
 	updateCmd.Flags().String("ecd", "", "Estimated completion date (YYYY-MM-DD)")
 	updateCmd.Flags().String("jira-issue", "", "Jira issue key (e.g., PROJ-123)")
 	updateCmd.Flags().String("github-issue", "", "GitHub issue URL")
+	updateCmd.Flags().String("item-notes", "", "Notes for work item")
 }

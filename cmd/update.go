@@ -71,6 +71,15 @@ var updateCmd = &cobra.Command{
 					if pr, _ := cmd.Flags().GetString("add-pr"); pr != "" {
 						p.WorkItems[i].PRs = append(p.WorkItems[i].PRs, pr)
 					}
+					if ecd, _ := cmd.Flags().GetString("ecd"); ecd != "" {
+						p.WorkItems[i].ECD = ecd
+					}
+					if jira, _ := cmd.Flags().GetString("jira-issue"); jira != "" {
+						p.WorkItems[i].JiraIssue = jira
+					}
+					if gh, _ := cmd.Flags().GetString("github-issue"); gh != "" {
+						p.WorkItems[i].GithubIssue = gh
+					}
 					break
 				}
 			}
@@ -101,4 +110,7 @@ func init() {
 	updateCmd.Flags().String("item", "", "Work item to update")
 	updateCmd.Flags().String("status", "", "New status for work item")
 	updateCmd.Flags().String("add-pr", "", "Add PR link to work item")
+	updateCmd.Flags().String("ecd", "", "Estimated completion date (YYYY-MM-DD)")
+	updateCmd.Flags().String("jira-issue", "", "Jira issue key (e.g., PROJ-123)")
+	updateCmd.Flags().String("github-issue", "", "GitHub issue URL")
 }

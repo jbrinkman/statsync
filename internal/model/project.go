@@ -7,9 +7,12 @@ import (
 )
 
 type WorkItem struct {
-	Label  string   `json:"label"`
-	Status Status   `json:"status"`
-	PRs    []string `json:"prs"`
+	Label       string   `json:"label"`
+	Status      Status   `json:"status"`
+	PRs         []string `json:"prs"`
+	ECD         string   `json:"ecd,omitempty"`
+	JiraIssue   string   `json:"jiraIssue,omitempty"`
+	GithubIssue string   `json:"githubIssue,omitempty"`
 }
 
 type Project struct {

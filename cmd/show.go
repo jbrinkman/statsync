@@ -43,9 +43,21 @@ var showCmd = &cobra.Command{
 			for _, item := range p.WorkItems {
 				prs := ""
 				if len(item.PRs) > 0 {
-					prs = " [" + strings.Join(item.PRs, ", ") + "]"
+					prs = " PRs: " + strings.Join(item.PRs, ", ")
 				}
-				fmt.Printf("  - %-25s %-15s%s\n", item.Label, item.Status, prs)
+				fmt.Printf("  - %-25s %-15s\n", item.Label, item.Status)
+				if item.ECD != "" {
+					fmt.Printf("    ECD: %s\n", item.ECD)
+				}
+				if item.JiraIssue != "" {
+					fmt.Printf("    Jira: %s\n", item.JiraIssue)
+				}
+				if item.GithubIssue != "" {
+					fmt.Printf("    GitHub: %s\n", item.GithubIssue)
+				}
+				if prs != "" {
+					fmt.Printf("   %s\n", prs)
+				}
 			}
 		}
 

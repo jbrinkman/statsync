@@ -2,3 +2,4 @@ node_modules/
 dist/
 .env
 valkey-data/
+AWSStatus.xlsx

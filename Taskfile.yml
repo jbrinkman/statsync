@@ -1,0 +1,60 @@
+version: '3'
+
+vars:
+  BINARY: statsync
+
+tasks:
+  build:
+    desc: Build the binary
+    cmds:
+      - go build -o {{.BINARY}} .
+
+  run:
+    desc: Run the application
+    cmds:
+      - go run . {{.CLI_ARGS}}
+
+  test:
+    desc: Run tests
+    cmds:
+      - go test ./...
+
+  lint:
+    desc: Run linter
+    cmds:
+      - golangci-lint run
+
+  fmt:
+    desc: Format code
+    cmds:
+      - gofmt -w .
+
+  tidy:
+    desc: Tidy go modules
+    cmds:
+      - go mod tidy
+
+  dev:
+    desc: Start Valkey for local development
+    cmds:
+      - docker compose up -d
+
+  dev:stop:
+    desc: Stop local Valkey
+    cmds:
+      - docker compose down
+
+  dev:reset:
+    desc: Stop Valkey and remove data
+    cmds:
+      - docker compose down -v
+
+  clean:
+    desc: Remove build artifacts
+    cmds:
+      - rm -f {{.BINARY}}
+
+  install:
+    desc: Install binary to GOPATH/bin
+    cmds:
+      - go install .

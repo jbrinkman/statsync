@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "4280:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    environment:
+      - VALKEY_ADDR=valkey:6379
+    depends_on:
+      - valkey
+
+  valkey:
+    image: valkey/valkey-bundle:9.1-rc2
+    volumes:
+      - valkey-data:/data
+
+volumes:
+  valkey-data:

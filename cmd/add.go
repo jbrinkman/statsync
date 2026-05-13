@@ -49,6 +49,7 @@ var addCmd = &cobra.Command{
 			Framework: framework,
 			Assignee:  assignee,
 			WorkItems: []model.WorkItem{},
+			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
 		}
 

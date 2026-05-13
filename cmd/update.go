@@ -48,9 +48,11 @@ var updateCmd = &cobra.Command{
 		// Add a new work item
 		if addItem, _ := cmd.Flags().GetString("add-item"); addItem != "" {
 			p.WorkItems = append(p.WorkItems, model.WorkItem{
-				Label:  addItem,
-				Status: model.StatusNotStarted,
-				PRs:    []string{},
+				Label:     addItem,
+				Status:    model.StatusNotStarted,
+				PRs:       []string{},
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
 			})
 		}
 
@@ -83,6 +85,7 @@ var updateCmd = &cobra.Command{
 					if notes, _ := cmd.Flags().GetString("item-notes"); notes != "" {
 						p.WorkItems[i].Notes = notes
 					}
+					p.WorkItems[i].UpdatedAt = time.Now()
 					break
 				}
 			}

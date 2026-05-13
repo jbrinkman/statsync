@@ -14,6 +14,8 @@ type WorkItem struct {
 	JiraIssue   string   `json:"jiraIssue,omitempty"`
 	GithubIssue string   `json:"githubIssue,omitempty"`
 	Notes       string   `json:"notes,omitempty"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }
 
 type Project struct {
@@ -24,6 +26,7 @@ type Project struct {
 	Assignee  string     `json:"assignee"`
 	WorkItems []WorkItem `json:"workItems"`
 	Notes     string     `json:"notes"`
+	CreatedAt time.Time  `json:"createdAt"`
 	UpdatedAt time.Time  `json:"updatedAt"`
 }
 

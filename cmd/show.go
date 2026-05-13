@@ -36,6 +36,7 @@ var showCmd = &cobra.Command{
 		fmt.Printf("Framework: %s\n", p.Framework)
 		fmt.Printf("Assignee:  %s\n", p.Assignee)
 		fmt.Printf("Status:    %s\n", p.ComputedStatus())
+		fmt.Printf("Created:   %s\n", p.CreatedAt.Format("2006-01-02"))
 		fmt.Printf("Updated:   %s\n", p.UpdatedAt.Format("2006-01-02"))
 
 		if len(p.WorkItems) > 0 {

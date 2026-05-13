@@ -32,7 +32,7 @@ var showCmd = &cobra.Command{
 
 		fmt.Printf("Name:      %s\n", p.Name)
 		fmt.Printf("Slug:      %s\n", p.Slug)
-		fmt.Printf("Type:      %s\n", p.Type)
+		fmt.Printf("Category:  %s\n", p.Category)
 		fmt.Printf("Framework: %s\n", p.Framework)
 		fmt.Printf("Assignee:  %s\n", p.Assignee)
 		fmt.Printf("Status:    %s\n", p.ComputedStatus())
@@ -42,13 +42,16 @@ var showCmd = &cobra.Command{
 		if len(p.WorkItems) > 0 {
 			fmt.Println("\nWork Items:")
 			for _, item := range p.WorkItems {
-				prs := ""
-				if len(item.PRs) > 0 {
-					prs = " PRs: " + strings.Join(item.PRs, ", ")
+				assignee := item.Assignee
+				if assignee == "" {
+					assignee = p.Assignee
 				}
-				fmt.Printf("  - %-25s %-15s\n", item.Label, item.Status)
+				fmt.Printf("  - %-25s %-15s (%s)\n", item.Label, item.Status, assignee)
 				if item.ECD != "" {
 					fmt.Printf("    ECD: %s\n", item.ECD)
+				}
+				if item.Release != "" {
+					fmt.Printf("    Release: %s\n", item.Release)
 				}
 				if item.JiraIssue != "" {
 					fmt.Printf("    Jira: %s\n", item.JiraIssue)
@@ -56,11 +59,16 @@ var showCmd = &cobra.Command{
 				if item.GithubIssue != "" {
 					fmt.Printf("    GitHub: %s\n", item.GithubIssue)
 				}
+				if len(item.PRs) > 0 {
+					fmt.Printf("    PRs: %s\n", strings.Join(item.PRs, ", "))
+				}
+				if len(item.Resources) > 0 {
+					for _, r := range item.Resources {
+						fmt.Printf("    Resource: %s - %s\n", r.Label, r.URL)
+					}
+				}
 				if item.Notes != "" {
 					fmt.Printf("    Notes: %s\n", item.Notes)
-				}
-				if prs != "" {
-					fmt.Printf("   %s\n", prs)
 				}
 			}
 		}

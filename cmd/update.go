@@ -35,8 +35,8 @@ var updateCmd = &cobra.Command{
 		if v, _ := cmd.Flags().GetString("assignee"); v != "" {
 			p.Assignee = v
 		}
-		if v, _ := cmd.Flags().GetString("type"); v != "" {
-			p.Type = v
+		if v, _ := cmd.Flags().GetString("category"); v != "" {
+			p.Category = v
 		}
 		if v, _ := cmd.Flags().GetString("framework"); v != "" {
 			p.Framework = v
@@ -85,6 +85,16 @@ var updateCmd = &cobra.Command{
 					if notes, _ := cmd.Flags().GetString("item-notes"); notes != "" {
 						p.WorkItems[i].Notes = notes
 					}
+					if assignee, _ := cmd.Flags().GetString("item-assignee"); assignee != "" {
+						p.WorkItems[i].Assignee = assignee
+					}
+					if release, _ := cmd.Flags().GetString("release"); release != "" {
+						p.WorkItems[i].Release = release
+					}
+					if resLabel, _ := cmd.Flags().GetString("add-resource-label"); resLabel != "" {
+						resURL, _ := cmd.Flags().GetString("add-resource-url")
+						p.WorkItems[i].Resources = append(p.WorkItems[i].Resources, model.Resource{Label: resLabel, URL: resURL})
+					}
 					p.WorkItems[i].UpdatedAt = time.Now()
 					break
 				}
@@ -108,10 +118,10 @@ var updateCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(updateCmd)
-	updateCmd.Flags().String("assignee", "", "Update assignee")
-	updateCmd.Flags().String("type", "", "Update project type")
+	updateCmd.Flags().String("assignee", "", "Update project assignee")
+	updateCmd.Flags().String("category", "", "Update project category")
 	updateCmd.Flags().String("framework", "", "Update framework")
-	updateCmd.Flags().String("notes", "", "Update notes")
+	updateCmd.Flags().String("notes", "", "Update project notes")
 	updateCmd.Flags().String("add-item", "", "Add a new work item")
 	updateCmd.Flags().String("item", "", "Work item to update")
 	updateCmd.Flags().String("status", "", "New status for work item")
@@ -120,4 +130,8 @@ func init() {
 	updateCmd.Flags().String("jira-issue", "", "Jira issue key (e.g., PROJ-123)")
 	updateCmd.Flags().String("github-issue", "", "GitHub issue URL")
 	updateCmd.Flags().String("item-notes", "", "Notes for work item")
+	updateCmd.Flags().String("item-assignee", "", "Assignee for work item")
+	updateCmd.Flags().String("release", "", "Release URL for work item")
+	updateCmd.Flags().String("add-resource-label", "", "Label for resource link")
+	updateCmd.Flags().String("add-resource-url", "", "URL for resource link (use with --add-resource-label)")
 }

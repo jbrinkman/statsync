@@ -29,11 +29,11 @@ var listCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		typeFilter, _ := cmd.Flags().GetString("type")
+		typeFilter, _ := cmd.Flags().GetString("category")
 
 		var filtered []*model.Project
 		for _, p := range projects {
-			if typeFilter != "" && p.Type != typeFilter {
+			if typeFilter != "" && p.Category != typeFilter {
 				continue
 			}
 			filtered = append(filtered, p)
@@ -47,12 +47,12 @@ var listCmd = &cobra.Command{
 		for _, p := range filtered {
 			status := p.ComputedStatus()
 			itemCount := len(p.WorkItems)
-			fmt.Printf("%-30s %-15s %-15s %d items\n", p.Name, p.Type, status, itemCount)
+			fmt.Printf("%-30s %-15s %-15s %d items\n", p.Name, p.Category, status, itemCount)
 		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(listCmd)
-	listCmd.Flags().String("type", "", "Filter by project type")
+	listCmd.Flags().String("category", "", "Filter by project category")
 }

@@ -38,14 +38,14 @@ var addCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		projType, _ := cmd.Flags().GetString("type")
+		projType, _ := cmd.Flags().GetString("category")
 		framework, _ := cmd.Flags().GetString("framework")
 		assignee, _ := cmd.Flags().GetString("assignee")
 
 		p := &model.Project{
 			Name:      name,
 			Slug:      slug,
-			Type:      projType,
+			Category:  projType,
 			Framework: framework,
 			Assignee:  assignee,
 			WorkItems: []model.WorkItem{},
@@ -64,7 +64,7 @@ var addCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(addCmd)
-	addCmd.Flags().String("type", "", "Project type (e.g., integration, documentation)")
+	addCmd.Flags().String("category", "", "Project category (e.g., AI Framework Integrations)")
 	addCmd.Flags().String("framework", "", "Target framework name")
 	addCmd.Flags().String("assignee", "", "Person assigned to this project")
 }
